@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+h1 {
+    margin-bottom: 20px;
+}
+#shirt-details {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+#shirt-image {
+    max-width: 300px;
+    margin-right: 20px;
+}
+.shirt-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.view-buttons, .color-buttons {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+.button, .color-button {
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+}
+.color-button {
+    color: white;
+}
+.color-button:hover {
+    opacity: 0.8;
+}
+.button {
+    background-color: black;
+    color: white;
+}
+.button:hover {
+    background-color: #333;
+}
+.color-button.selected {
+    border: 2px solid black;
+}
+#shirt-price, #shirt-description {
+    margin: 10px 0;
+}
+
