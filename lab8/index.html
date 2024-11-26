@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Drawing</title>
+    <style>
+        #controls {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        #drawingCanvas {
+            border: 1px solid black;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <label>
+            <input type="radio" name="shape" value="circle" checked> Circle
+        </label>
+        <label>
+            <input type="radio" name="shape" value="rectangle"> Rectangle
+        </label>
+    </div>
+    <canvas id="drawingCanvas" width="800" height="500"></canvas>
+    <script src="scripts.js"></script>
+</body>
+</html>
