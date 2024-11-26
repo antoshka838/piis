@@ -5,11 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let initialPosition = {};
 
     targets.forEach(target => {
-        // Сохраняем начальные позиции
         target.initialLeft = target.offsetLeft;
         target.initialTop = target.offsetTop;
 
-        // Перетаскивание при нажатии и удержании ЛКМ
         target.addEventListener('mousedown', function(e) {
             if (isDoubleClickDrag) return;
 
@@ -21,11 +19,10 @@ document.addEventListener('DOMContentLoaded', function() {
             document.addEventListener('mouseup', onMouseUp);
         });
 
-        // Двойной клик для прикрепления к мыши
         target.addEventListener('dblclick', function(e) {
             draggedElement = e.target;
             isDoubleClickDrag = true;
-            draggedElement.style.backgroundColor = 'lightblue'; // Изменение цвета при двойном клике
+            draggedElement.style.backgroundColor = 'lightblue'; 
 
             document.addEventListener('mousemove', onMouseMove);
             document.addEventListener('click', onClick);
@@ -50,19 +47,18 @@ document.addEventListener('DOMContentLoaded', function() {
             document.removeEventListener('mousemove', onMouseMove);
             document.removeEventListener('click', onClick);
             isDoubleClickDrag = false;
-            draggedElement.style.backgroundColor = ''; // Возврат цвета при откреплении
+            draggedElement.style.backgroundColor = '';
             draggedElement = null;
         }
     }
 
-    // Прерывание действий по нажатию Esc
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && draggedElement) {
             if (isDoubleClickDrag) {
-                draggedElement.style.backgroundColor = ''; // Возврат цвета при откреплении
+                draggedElement.style.backgroundColor = '';
                 isDoubleClickDrag = false;
             }
-            // Возврат на исходную позицию
+            
             draggedElement.style.left = draggedElement.initialLeft + 'px';
             draggedElement.style.top = draggedElement.initialTop + 'px';
             draggedElement = null;
