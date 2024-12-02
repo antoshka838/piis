@@ -1,31 +1,31 @@
 const targets = document.querySelectorAll('.target');
 
-let isDragging = false; // Флаг перетаскивания
-let isPinned = false; // Флаг режима "закрепления"
-let currentElement = null; // Активный элемент
-let offsetX, offsetY; // Смещения
-let originalPosition = {}; // Исходная позиция элемента
-let lastTouchTime = 0; // Время последнего касания
-const doubleTapDelay = 300; // Интервал для двойного касания
-let isClickBlocked = false; // Блокировка кликов при двойном касании
+let isDragging = false; 
+let isPinned = false; 
+let currentElement = null; 
+let offsetX, offsetY; 
+let originalPosition = {}; 
+let lastTouchTime = 0;
+const doubleTapDelay = 300; 
+let isClickBlocked = false; 
 
-// Сброс позиции элемента
+
 function resetPosition() {
   if (currentElement) {
     currentElement.style.left = `${originalPosition.left}px`;
     currentElement.style.top = `${originalPosition.top}px`;
     isDragging = false;
     isPinned = false;
-    currentElement.style.backgroundColor = 'red'; // Индикатор сброса
+    currentElement.style.backgroundColor = 'red'; 
     currentElement = null;
   }
 }
 
-// Начало перетаскивания
+
 function initDrag(event) {
   if (isClickBlocked) return;
   if (isPinned) {
-    return; // В режиме "закрепления" игнорируем обычное перетаскивание
+    return; 
   }
 
   currentElement = event.currentTarget;
@@ -39,27 +39,25 @@ function initDrag(event) {
   originalPosition.top = parseInt(currentElement.style.top) || 0;
 }
 
-// Обработчик touchstart
+
 function onTouchStart(event) {
   const currentTime = Date.now();
 
   if (event.touches.length === 1) {
     if (currentTime - lastTouchTime <= doubleTapDelay) {
-      onDoubleClick(event); // Двойное касание
+      onDoubleClick(event); 
     } else if (!isPinned) {
-      initDrag(event); // Начало перетаскивания
+      initDrag(event); 
     }
   }
 
   if (event.touches.length > 1) {
-    // Второе касание сбрасывает элемент
     resetPosition();
   }
 
   lastTouchTime = currentTime;
 }
 
-// Обработчик движения touchmove
 function onMove(event) {
   if (isDragging || isPinned) {
     const clientX = event.touches[0].clientX;
@@ -70,22 +68,19 @@ function onMove(event) {
   }
 }
 
-// Обработчик touchend
 function onTouchEnd() {
-  isDragging = false; // Завершаем перетаскивание
+  isDragging = false; 
 }
 
-// Обработчик двойного нажатия
 function onDoubleClick(event) {
-  isClickBlocked = true; // Блокируем дополнительные клики
+  isClickBlocked = true; 
 
   if (!isPinned) {
-    // Включаем режим "закрепления"
     isPinned = true;
     currentElement = event.currentTarget;
-    currentElement.style.backgroundColor = 'green'; // Индикатор закрепления
+    currentElement.style.backgroundColor = 'green'; 
   } else {
-    // Выключаем режим "закрепления"
+
     resetPosition();
   }
 
@@ -94,7 +89,6 @@ function onDoubleClick(event) {
   }, doubleTapDelay);
 }
 
-// Привязываем события
 targets.forEach((target) => {
   target.addEventListener('touchstart', onTouchStart);
   target.addEventListener('dblclick', onDoubleClick);
