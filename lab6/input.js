@@ -83,7 +83,7 @@ function onDoubleClick(event) {
     // Включаем режим "закрепления"
     isPinned = true;
     currentElement = event.currentTarget;
-    currentElement.style.backgroundColor = 'blue'; // Индикатор закрепления
+    currentElement.style.backgroundColor = 'green'; // Индикатор закрепления
   } else {
     // Выключаем режим "закрепления"
     resetPosition();
